@@ -5,38 +5,40 @@ import PropTypes from "prop-types";
 
 const getSx = (theme, type, maxWidth) => {
 	const sx = {
-		maxWidth: maxWidth,
-		"&  .MuiOutlinedInput-root ": {
-			"&:hover .MuiOutlinedInput-notchedOutline": {
-				borderColor: theme.palette.primary.contrastText, // Adjust hover border color
+			maxWidth: maxWidth,
+			"&  .MuiOutlinedInput-root ": {
+				"& .MuiOutlinedInput-notchedOutline": {
+					borderColor: theme.palette.primary.contrastText, //Default lighter color
+				},
+				"&:hover .MuiOutlinedInput-notchedOutline": {
+					borderColor: theme.palette.primary.contrastText, 
+				},
+				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+					borderColor: theme.palette.common.black, // Dark color when focused
+				},
+				"&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
+					borderColor: theme.palette.primary.contrastText, // Lighter when disabled
+					opacity: 0.5,
+				},
 			},
-			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-				borderColor: theme.palette.accent.main, // Adjust focus border color
-			},
-			"&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
-				borderColor: theme.palette.primary.contrastText, // CAIO_REVIEW
-				opacity: 0.5,
-			},
-		},
-
-		"& .MuiFormHelperText-root": {
-			position: "absolute",
-			bottom: `-${theme.spacing(24)}`,
-			minHeight: theme.spacing(24),
-		},
-	};
-
-	if (type === "url") {
-		return {
-			...sx,
-			"& .MuiInputBase-root": { padding: 0 },
-			"& .MuiStack-root": {
-				borderTopLeftRadius: theme.shape.borderRadius,
-				borderBottomLeftRadius: theme.shape.borderRadius,
+			"& .MuiFormHelperText-root": {
+				position: "absolute",
+				bottom: `-${theme.spacing(24)}`,
+				minHeight: theme.spacing(24),
 			},
 		};
-	}
-	return sx;
+	
+		if (type === "url") {
+			return {
+				...sx,
+				"& .MuiInputBase-root": { padding: 0 },
+				"& .MuiStack-root": {
+					borderTopLeftRadius: theme.shape.borderRadius,
+					borderBottomLeftRadius: theme.shape.borderRadius,
+				},
+			};
+		}
+		return sx;
 };
 
 const Required = () => {
